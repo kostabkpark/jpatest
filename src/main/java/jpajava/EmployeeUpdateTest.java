@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class EmployeeTest {
+public class EmployeeUpdateTest {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpatest");
         EntityManager em = emf.createEntityManager();
@@ -17,11 +17,14 @@ public class EmployeeTest {
         System.out.println("트랜잭션 시작");
         try {
             System.out.println("비영속 상태");
-            Employee emp = new Employee("202402","김연아",null,"2024-01-01", 10L);
+            Employee emp = new Employee("202402", "김연아", null, "2024-01-01", 100L);
             em.persist(emp);
             System.out.println("영속 상태");
-            em.find(Employee.class, "202402");
+            emp = em.find(Employee.class, "202402");
+            System.out.println(emp.getEmpName());
             System.out.println("1차 캐시에서 가져옴");
+            emp.setSalary(200L);
+            em.persist(emp);
             System.out.println("커밋 전");
             tx.commit();
             System.out.println("커밋 후");
