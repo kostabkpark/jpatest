@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name="employee")
 public class Employee {
     @Id
-    @Column(name="emp_id", length=6)
+    @Column(length=6)
     private String empId;
     @Column(length = 10, nullable = false)
     private String empName;
@@ -69,5 +69,16 @@ public class Employee {
 
     public void setSalary(long salary) {
         this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "empId='" + empId + '\'' +
+                ", empName='" + empName + '\'' +
+                ", department=" + department +
+                ", joinDate='" + joinDate + '\'' +
+                ", salary=" + salary +
+                '}';
     }
 }

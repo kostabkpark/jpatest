@@ -1,6 +1,8 @@
 package domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="dept")
@@ -11,6 +13,9 @@ public class Department {
     private int deptId;
     @Column(name="dept_name", length = 10, nullable = false)
     private String deptName;
+
+    @OneToMany(mappedBy = "department")
+    List<Employee> emps = new ArrayList<Employee>();
 
     public int getDeptId() {
         return deptId;
@@ -26,5 +31,17 @@ public class Department {
 
     public void setDeptName(String deptName) {
         this.deptName = deptName;
+    }
+
+    public List<Employee> getEmps() {
+        return emps;
+    }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "deptId=" + deptId +
+                ", deptName='" + deptName + '\'' +
+                '}';
     }
 }
