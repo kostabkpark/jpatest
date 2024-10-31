@@ -1,9 +1,6 @@
 package domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="employee")
@@ -11,8 +8,14 @@ public class Employee {
     @Id
     @Column(name="emp_id", length=6)
     private String empId;
+    @Column(length = 10, nullable = false)
     private String empName;
-    private String deptId;
+
+    //@OneToOne             //- fetch type : EAGER
+    //@OneToMany            //- fetch type : Lazy
+    @ManyToOne             //- fetch type : EAGER , 즉시로딩
+    @JoinColumn(name="dept_id")
+    private Department department;
     private String joinDate;
     private long salary;
 
@@ -20,10 +23,10 @@ public class Employee {
 
     }
 
-    public Employee(String empId, String empName, String deptId, String joinDate, long salary) {
+    public Employee(String empId, String empName, Department department, String joinDate, long salary) {
         this.empId = empId;
         this.empName = empName;
-        this.deptId = deptId;
+        this.department = department;
         this.joinDate = joinDate;
         this.salary = salary;
     }
@@ -44,12 +47,12 @@ public class Employee {
         this.empName = empName;
     }
 
-    public String getDeptId() {
-        return deptId;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDeptId(String deptId) {
-        this.deptId = deptId;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public String getJoinDate() {
