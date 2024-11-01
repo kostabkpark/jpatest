@@ -19,7 +19,8 @@ public class Emp_Dept_loop_test {
         try {
 
             Employee employee = em.find(Employee.class, "202403");
-            System.out.println(employee);
+            System.out.println("emp name : " + employee.getEmpName());
+            System.out.println("dept name : " + employee.getDepartment().getDeptName());
 
 
             tx.commit();

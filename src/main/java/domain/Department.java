@@ -14,8 +14,19 @@ public class Department {
     @Column(name="dept_name", length = 10, nullable = false)
     private String deptName;
 
-    @OneToMany(mappedBy = "department")
-    List<Employee> emps = new ArrayList<Employee>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id")
+    private Company company;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+//    @OneToMany(mappedBy = "department")
+//    List<Employee> emps = new ArrayList<Employee>();
 
     public int getDeptId() {
         return deptId;
@@ -33,9 +44,9 @@ public class Department {
         this.deptName = deptName;
     }
 
-    public List<Employee> getEmps() {
-        return emps;
-    }
+//    public List<Employee> getEmps() {
+//        return emps;
+//    }
 
     @Override
     public String toString() {

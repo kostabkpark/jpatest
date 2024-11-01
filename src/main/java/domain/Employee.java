@@ -13,14 +13,13 @@ public class Employee {
 
     //@OneToOne             //- fetch type : EAGER
     //@OneToMany            //- fetch type : Lazy
-    @ManyToOne             //- fetch type : EAGER , 즉시로딩
+    @ManyToOne(fetch = FetchType.LAZY) //- fetch type : EAGER , 즉시로딩
     @JoinColumn(name="dept_id")
     private Department department;
     private String joinDate;
     private long salary;
 
     public Employee() {
-
     }
 
     public Employee(String empId, String empName, Department department, String joinDate, long salary) {
